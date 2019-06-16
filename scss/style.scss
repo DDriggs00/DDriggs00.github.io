@@ -70,7 +70,7 @@ a {
 	}
 }
 
-.probootstrap-header {
+.site-header {
 	padding-top: 30px;
 	padding-bottom: 30px;
 	width: 100%;
@@ -79,7 +79,7 @@ a {
 	top: 0;
 }
 
-.probootstrap-logo {
+.site-logo {
 	float: left;
 	color: $brand-white;
 	padding-left: 0px;
@@ -95,13 +95,13 @@ a {
 		padding-left: 0px;
 	}
 }
-.probootstrap-nav {
+.site-nav {
 	margin-left: 60px;
 	text-align: left;
 	float: left;
 	width: calc(100% - 200px);
 	position: relative;
-	.probootstrap-mobile-menu-active & {
+	.site-mobile-menu-active & {
 		text-align: left;
 		position: fixed;
 		display: block!important;
@@ -119,7 +119,7 @@ a {
 		transform: translateX(300px);
 	}
 	.extra-text {
-		.probootstrap-mobile-menu-active & {
+		.site-mobile-menu-active & {
 			display: block;
 			float: left;
 			clear: both;
@@ -152,16 +152,16 @@ a {
 			}
 		}
 	}
-	.probootstrap-mobile-menu-active.show & {
+	.site-mobile-menu-active.show & {
 		transform: translateX(0px);
 	}
 }
 
 // main simple nav
-.probootstrap-main-nav {
+.site-main-nav {
 	margin: 0;
 	padding: 0;
-	.probootstrap-mobile-menu-active & {
+	.site-mobile-menu-active & {
 		float: left;
 		margin-top: 40px;
 		width: 100%;
@@ -172,7 +172,7 @@ a {
 		list-style: none;
 		display: inline;
 		font-size: 18px;
-		.probootstrap-mobile-menu-active & {
+		.site-mobile-menu-active & {
 			margin-bottom: 10px;
 			display: block;
 			padding-left: 0;
@@ -187,22 +187,22 @@ a {
 			&:hover {
 				color: $brand-white;
 			}
-			.probootstrap-mobile-menu-active.show & {
+			.site-mobile-menu-active.show & {
 				color: $brand-white;
 			}
-			.probootstrap-mobile-menu-active & {
+			.site-mobile-menu-active & {
 				margin-bottom: 10px;
 				padding: 5px 0;
 				display: block;
 			}
-			.probootstrap-mobile-menu-active & {
+			.site-mobile-menu-active & {
 				border-bottom: none!important;
 				&:hover {
 					color: $brand-white;	
 				}
 			}
 		}
-		&.probootstrap-cta {
+		&.site-cta {
 			margin-left: 20px;
 			a {
 				border: 2px solid $brand-white;
@@ -214,7 +214,7 @@ a {
 					color: $brand-primary;
 				}
 			}
-			.probootstrap-mobile-menu-active & {
+			.site-mobile-menu-active & {
 				margin-left: 0px;
 				margin-top: 20px;
 				a {
@@ -229,14 +229,14 @@ a {
 				&:hover {
 					color: $brand-white;
 				}
-				.probootstrap-mobile-menu-active & {
+				.site-mobile-menu-active & {
 					
 					color: $brand-primary;
 				}
 			}
 		}
 	}
-	.probootstrap-mobile-menu-active & {
+	.site-mobile-menu-active & {
 		li {
 			display: block;
 		}
@@ -258,14 +258,14 @@ a {
 	visibility: hidden;
 	transition: .3s all ease-out;
 }
-.probootstrap-mobile-menu-active.show {
+.site-mobile-menu-active.show {
 	.mobile-menu-overlay {
 		opacity: 1;
 		visibility: visible;
 	}
 }
 
-.probootstrap-header-social {
+.site-header-social {
 	position: absolute;
 	top: 34px;
 	right: 60px;
@@ -278,7 +278,7 @@ a {
 		}
 	}
 }
-.probootstrap-right-nav {
+.site-right-nav {
 	position: absolute; 
 	top: 3px; 
 	right: 0;
@@ -296,7 +296,7 @@ a {
 }
 
 // burger
-.probootstrap-burger-menu {
+.site-burger-menu {
   display: inline-block;
   width:18px;
   height:18px;
@@ -364,8 +364,8 @@ a {
     }
   }
 }
-.probootstrap-mobile-menu-active.show {
-	.probootstrap-burger-menu {
+.site-mobile-menu-active.show {
+	.site-burger-menu {
 	  i {
 	    color: $brand-white;
 	    background: $brand-black;
@@ -375,7 +375,7 @@ a {
 	  }
 	}
 }
-.probootstrap-burger-menu {
+.site-burger-menu {
   position: absolute;
   top: 30px;
   right: 20px;
@@ -468,26 +468,26 @@ a {
 	}
 }
 //section
-.probootstrap-section {
+.site-section {
 	padding: 4em 0;
 	position: relative;
 	z-index: 2;
-	&.probootstrap-section-sm {
+	&.site-section-sm {
 		padding: 3em 0;
 	}
-	&.probootstrap-border-top {
+	&.site-border-top {
 		border-top: 1px solid rgba(0,0,0,.1);
 	}
-	&.probootstrap-border-bottom {
+	&.site-border-bottom {
 		border-bottom: 1px solid rgba(0,0,0,.1);	
 	}
 	> .container {
-		&.probootstrap-border-top {
+		&.site-border-top {
 			padding-top: 50px;
 			border-top: 1px solid rgba(0,0,0,.1);
 		}
 	}
-	&.probootstrap-section-colored, &.probootstrap-section-dark {
+	&.site-section-colored, &.site-section-dark {
 		background: $brand-primary;
 		@include gradient($brand-secondary, $brand-primary);
 		// opacity: .8;
@@ -509,7 +509,7 @@ a {
 			color: rgba(255,255,255,1);
 		}
 	}
-	&.probootstrap-section-dark {
+	&.site-section-dark {
 		background: $brand-darker;
 		color: rgba(255,255,255,1);
 		.section-heading {
@@ -524,13 +524,13 @@ a {
 			color: rgba(255,255,255,.6);
 		}
 	}
-	&.probootstrap-section-lighter {
+	&.site-section-lighter {
 		background: lighten($brand-black, 97%);
 	}
 	@media screen and (max-width: $screen-sm) {
 		padding: 3em 0;
 	}
-	&.probootstrap-bg {
+	&.site-bg {
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-attachment: fixed;
@@ -564,7 +564,7 @@ a {
 		}
 	}
 }
-.probootstrap-cta {
+.site-cta {
 	border-top: 2px solid rgba(255,255,255,.1);
 	border-bottom: 2px solid rgba(255,255,255,.1);
 	padding: 50px 0;
@@ -582,10 +582,10 @@ a {
 		text-transform: uppercase;
 	}
 }
-.probootstrap-relative {
+.site-relative {
 	position: relative;
 }
-.probootstrap-owl-navigation {
+.site-owl-navigation {
 	margin: 0;
 	padding: 0;
 	&.absolute {
@@ -620,7 +620,7 @@ a {
 
 
 
-.probootstrap-footer-widget {
+.site-footer-widget {
 
 	float: left;
 	width: 100%;
@@ -639,13 +639,13 @@ a {
 		}	
 	}
 }
-.probootstrap-footer {
+.site-footer {
 	border-top: 2px solid rgba(255,255,255,.1);
 	padding: 5em 0;
 	@media screen and (max-width: $screen-sm) {
 		padding: 3em 0;
 	}
-	&.probootstrap-bg {
+	&.site-bg {
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-attachment: fixed;
@@ -741,7 +741,7 @@ a {
 		}
 	}
 }
-.probootstrap-link-wrap {
+.site-link-wrap {
 	padding-left: 40px;
 	@media screen and (max-width: 970px) {
 		padding-left: 0;
@@ -812,7 +812,7 @@ figure {
 }
 
 // accordion // panel 
-.probootstrap-panel {
+.site-panel {
 	.panel {
 		background: none;
 		border: none;
@@ -870,9 +870,9 @@ figure {
 }
 
 // video
-.probootstrap-video {
+.site-video {
 	position: relative;
-	.probootstrap-video-play {
+	.site-video-play {
 		position: absolute;
 		top: 0; 
 		left: 0;
@@ -926,11 +926,11 @@ figure {
 	}
 }
 // card
-.probootstrap-card {
+.site-card {
 	margin-bottom: 30px;
 	float: left;
 	width: 100%;
-	.probootstrap-card-media {
+	.site-card-media {
 		&.icon {
 			font-size: 30px;
 		}
@@ -946,9 +946,9 @@ figure {
 			}
 		}
 	}
-	.probootstrap-card-text {
+	.site-card-text {
 		padding: 20px;
-		.probootstrap-card-heading {
+		.site-card-heading {
 			@extend h3;
 			margin-top: 0;
 			margin-bottom: 20px;
@@ -959,7 +959,7 @@ figure {
 			}
 		}
 	}
-	&.probootstrap-listing {
+	&.site-listing {
 		margin-bottom: 20px;
 		background: $brand-white;
 		float: left;
@@ -967,9 +967,9 @@ figure {
 		transition: .3s all ease-in-out;
 		position: relative;
 		top: 0;
-		.probootstrap-card-media {
+		.site-card-media {
 			position: relative;
-			.probootstrap-love {
+			.site-love {
 				width: 40px;
 				height: 40px;
 				line-height: 40px;
@@ -1000,11 +1000,11 @@ figure {
 				}
 			}
 		}
-		.probootstrap-card-text {
-			.probootstrap-card-heading {
+		.site-card-text {
+			.site-card-heading {
 
 			}
-			.probootstrap-listing-location {
+			.site-listing-location {
 				display: table;
 				margin-bottom: 20px;
 				i, span {
@@ -1022,7 +1022,7 @@ figure {
 					color: lighten($brand-black, 74%);
 				}
 			}
-			.probootstrap-listing-category {
+			.site-listing-category {
 				margin-bottom: 5px;
 				span {
 					@include inline-block;
@@ -1043,7 +1043,7 @@ figure {
 					}
 				}
 			}
-			.probootstrap-listing-price {
+			.site-listing-price {
 				font-size: 16px;
 				color: lighten($brand-black, 74%);
 				strong {
@@ -1053,7 +1053,7 @@ figure {
 				}
 			}
 		}
-		.probootstrap-card-extra {
+		.site-card-extra {
 			float: left;
 			background: $brand-white;
 			width: 100%;
@@ -1086,14 +1086,14 @@ figure {
 			}
 		}
 	}
-	&.probootstrap-person {
+	&.site-person {
 		margin-bottom: 30px;
 		padding: 15px;
 		border: 2px solid rgba(255,255,255,.1);
 		h2 {
 			color: $brand-white!important;
 		}
-		.probootstrap-card-media {
+		.site-card-media {
 			padding-top: 30px;
 			img {
 				height: 200px;
@@ -1123,7 +1123,7 @@ figure {
 	}
 }
 // search
-.probootstrap-home-search {
+.site-home-search {
 	padding: 30px;
 	background: rgba($brand-black, .85);
 	margin-top: 300px;
@@ -1157,8 +1157,8 @@ figure {
 		margin-bottom: 10px;
 		font-weight: 300;
 	}
-	.probootstrap-field-group {
-		.probootstrap-fields {
+	.site-field-group {
+		.site-fields {
 			width: calc(100% - 200px);
 			text-align: left;
 			float: left;
@@ -1260,7 +1260,7 @@ figure {
 		height: 200px;
 	}
 }
-.probootstrap-cart {
+.site-cart {
 	a {
 		position: relative;
 
@@ -1311,7 +1311,7 @@ figure {
 
 // half
 // half content
-.probootstrap-half {
+.site-half {
 	display: flex;
 	flex-wrap: wrap;
 	.image-wrap, .text {
@@ -1405,7 +1405,7 @@ figure {
 }
 
 // overlay
-.probootstrap-hover-overlay {
+.site-hover-overlay {
 	position: relative;
 	display: block;
 	overflow: hidden;
@@ -1429,7 +1429,7 @@ figure {
 		visibility: visible;
 		z-index: 2;
 	}
-	.probootstrap-text-overlay {
+	.site-text-overlay {
 		text-align: center;
 		position: absolute;
 		z-index: 20;
@@ -1460,7 +1460,7 @@ figure {
 			opacity: 1;
 			visibility: visible;
 		}
-		// .probootstrap-text-overlay {
+		// .site-text-overlay {
 		// 	top: 20px;
 		// 	opacity: 1;
 		// 	visibility: visible;
@@ -1474,7 +1474,7 @@ figure {
 
 
 // block image
-.probootstrap-block-image {
+.site-block-image {
 	margin-bottom: 40px;
 	float: left;
 	width: 100%;
@@ -1493,7 +1493,7 @@ figure {
 }
 
 // footer social
-.probootstrap-social {
+.site-social {
 	padding: 0;
 	margin: 0;
 	li {
@@ -1596,9 +1596,9 @@ figure {
 }
 
 // form
-.probootstrap-form {
+.site-form {
 	margin-bottom: 50px;
-	&.probootstrap-form-box {
+	&.site-form-box {
 		background: $brand-white;
 		padding: 60px;
 		-webkit-box-shadow: 18px 17px 104px -24px rgba(0,0,0,0.1);
@@ -1648,14 +1648,14 @@ figure {
 
 
 // animate
-.probootstrap-animate {
+.site-animate {
 	opacity: 0;
 	visibility: hidden;
 }
 
 
 // contact info
-.probootstrap-contact-info, .with-icon {
+.site-contact-info, .with-icon {
 	padding: 0;
 	margin: 0 0 30px 0;
 	color: rgba(255,255,255,.4);
@@ -1691,7 +1691,7 @@ figure {
 	}
 }
 
-.probootstrap-section-heading {
+.site-section-heading {
 	.sub-heading {
 		font-size: 14px;
 		text-transform: uppercase;
@@ -1754,7 +1754,7 @@ figure {
   	padding-left: 30px;
   	padding-right: 30px;
   }
-  .probootstrap-heading {
+  .site-heading {
   	color: $brand-white;
   	font-weight: 300;
   	font-size: 170px;
@@ -1773,7 +1773,7 @@ figure {
   		}
   	}
   }
-  .probootstrap-sub-wrap {
+  .site-sub-wrap {
   	max-width: 600px;
   	text-align: left;
   	font-size: 20px;
@@ -1787,7 +1787,7 @@ figure {
   	}
   }
   .text-center {
-  	.probootstrap-sub-wrap {
+  	.site-sub-wrap {
   		margin: 0 auto;
   		text-align: center;
   	}
@@ -2048,7 +2048,7 @@ figure {
 	border: 2px solid $brand-black;
 }
 
-.probootstrap-testimony-wrap {
+.site-testimony-wrap {
 	max-width: 700px;
 	margin: 0 auto;
 	display: table;
@@ -2174,7 +2174,7 @@ figure {
 
 
 // Helper
-.probootstrap-gutter0 {
+.site-gutter0 {
 	> div[class*='col-'] {
 		padding-right: 0px;
 		padding-left: 0px;
@@ -2185,7 +2185,7 @@ figure {
 	}
 }
 
-.probootstrap-gutter10 {
+.site-gutter10 {
 	> div[class*='col-'] {
 		padding-right: 5px;
 		padding-left: 5px;
@@ -2195,7 +2195,7 @@ figure {
 		}
 	}
 }
-.probootstrap-gutter40 {
+.site-gutter40 {
 	> div[class*='col-'] {
 		padding-right: 20px;
 		padding-left: 20px;
@@ -2205,7 +2205,7 @@ figure {
 		}
 	}
 }
-.probootstrap-gutter60 {
+.site-gutter60 {
 	> div[class*='col-'] {
 		padding-right: 30px;
 		padding-left: 30px;
@@ -2284,16 +2284,16 @@ figure {
 .pb0 {
 	padding-bottom: 0!important;
 }
-.probootstrap-black-color {
+.site-black-color {
 	color: $brand-black!important;
 }
-.probootstrap-white-color {
+.site-white-color {
 	color: $brand-white!important;
 }
-.probootstrap-primary-color {
+.site-primary-color {
 	color: $brand-primary!important;
 }
-.probootstrap-secondary-color {
+.site-secondary-color {
 	color: $brand-secondary!important;
 }
 .img-sm-responsive {
@@ -2314,7 +2314,7 @@ figure {
 }
 
 // preloader
-.probootstrap-loader {
+.site-loader {
 	position: fixed;
 	left: 0px;
 	top: 0px;
