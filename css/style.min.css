@@ -2714,3 +2714,9 @@ figure:hover figcaption {
     outline: 0;
     background: rgba(0, 0, 0, .9)
 }
+
+.twocolumnul {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+  }
