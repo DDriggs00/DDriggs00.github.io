@@ -1,136 +1,98 @@
-/* Needed gulp config */
+const gulp = require('gulp')
+const awspublish = require('gulp-awspublish')
+const awspublishRouter = require("gulp-awspublish-router");
+const cloudfront = require('gulp-cloudfront-invalidate-aws-publish')
+const parallelize = require('concurrent-transform')
 
-var gulp = require('gulp');  
-var sass = require('gulp-sass');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var notify = require('gulp-notify');
-var minifycss = require('gulp-minify-css');
-var concat = require('gulp-concat');
-var plumber = require('gulp-plumber');
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
-const sourcemaps = require('gulp-sourcemaps');
-const autoprefixer = require('gulp-autoprefixer');
+// https://docs.aws.amazon.com/cli/latest/userguide/cli-environment.html
 
-/* Setup scss path */
-var paths = {
-    scss: './sass/*.scss'
-};
+const config = {
+  // Required
+  params: {
+    Bucket: process.env.AWS_BUCKET_NAME
+  },
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    signatureVersion: 'v3'
+  },
 
-/* Scripts task */
-gulp.task('scripts', function() {
-  return gulp.src([
-    /* Add your JS files here, they will be combined in this order */
-    'js/vendor/jquery.min.js',
-    'js/vendor/jquery.easing.1.3.js',
-    'js/vendor/jquery.stellar.min.js',
-    'js/vendor/jquery.flexslider-min.js',
-    'js/vendor/jquery.countTo.js',
-    'js/vendor/jquery.appear.min.js',
-    'js/vendor/jquery.magnific-popup.min.js',
-    'js/vendor/owl.carousel.min.js',
-    'js/vendor/bootstrap.min.js',
-    'js/vendor/jquery.waypoints.min.js'
-    ])
-    .pipe(concat('scripts.js'))
-    .pipe(gulp.dest('js'))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(uglify())
-    .pipe(gulp.dest('js'));
-});
+  // Optional
+  deleteOldVersions: false, // KHATRON KE KHILADI // NOT FOR PRODUCTION // WHEN CLEANING UP THE BUCKET; JUST TURN IT ON.
+  distribution: process.env.AWS_CLOUDFRONT, // CloudFront distribution ID
+  region: process.env.AWS_DEFAULT_REGION,
+  headers: {
+    /* 'Cache-Control': 'max-age=315360000, no-transform, public', */
+  },
 
-gulp.task('minify-main', function() {
-  return gulp.src([
-    /* Add your JS files here, they will be combined in this order */
-    'js/main.js'
-    ])
-    .pipe(rename({suffix: '.min'}))
-    .pipe(uglify())
-    .pipe(gulp.dest('js'));
-});
+  routerConfig: awspublishRouter({
+    routes: {
+        "^_nuxt/(?:.+)\\.(?:js|css|svg|ttf|png|json)$": {
+            // don't modify original key. this is the default
+            key: "$&",
+            // use gzip for assets that benefit from it
+            gzip: true,
+            // cache static assets for 1 year for user
+            cacheTime: 31536000,
+            // cache static assets for 1 year on the CDN
+            sharedCacheTime: 31536000
+        },
+        "^images/(?:.+)\\.(?:jpg|jpeg|gif|js|css|svg|ttf|png|json)$": {
+            // don't modify original key. this is the default
+            key: "$&",
+            // use gzip for assets that benefit from it
+            gzip: true,
+            // cache static assets for 1 year for user
+            cacheTime: 31536000,
+            // cache static assets for 1 year on the CDN
+            sharedCacheTime: 31536000
+        },
+        // pass-through for anything that wasn't matched by routes above, to be uploaded with default options
+        "^.+$": "$&"
+    }
+  }),
 
-/* Sass task */
-gulp.task('sass', function () {  
-    gulp.src('scss/style.scss')
-    .pipe(plumber())
-    .pipe(sass({
-      errLogToConsole: true,
+  // Sensible Defaults - gitignore these Files and Dirs
+  distDir: 'dist',
+  indexRootPath: true,
+  cacheFileName: '.awspublish',
+  concurrentUploads: 10,
+  wait: true // wait for CloudFront invalidation to complete (about 30-60 seconds)
+}
 
-      //outputStyle: 'compressed',
-      // outputStyle: 'compact',
-      // outputStyle: 'nested',
-      outputStyle: 'expanded',
-      precision: 10
-    }))
+gulp.task('deploy', function () {
+  // create a new publisher using S3 options
+  // http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#constructor-property
+  const publisher = awspublish.create(config)
 
-    .pipe(sourcemaps.init())
-    .pipe(autoprefixer({
-        browsers: ['last 2 versions'],
-        cascade: false
-    }))
-    .pipe(gulp.dest('css'))
+  let g = gulp.src('./' + config.distDir + '/**')
 
-    .pipe(rename({suffix: '.min'}))
-    .pipe(minifycss())
-    .pipe(gulp.dest('css'))
-    /* Reload the browser CSS after every change */
-    .pipe(reload({stream:true}));
-});
+  // set route based config
+  g = g.pipe(config.routerConfig)
 
-gulp.task('merge-styles', function () {
+  // publisher will add Content-Length, Content-Type and headers specified above
+  // If not specified it will set x-amz-acl to public-read by default
+  g = g.pipe(
+    parallelize(publisher.publish(config.headers), config.concurrentUploads)
+  )
 
-    return gulp.src([
-        'css/vendor/bootstrap.min.css',
-        'css/vendor/animate.css',
-        'css/vendor/icomoon.css',
-        'css/vendor/flexslider.css',
-        'css/vendor/owl.carousel.min.css',
-        'css/vendor/owl.theme.default.min.css',
-        'css/vendor/magnific-popup.css',
-        'css/vendor/photoswipe.css',
-        'css/vendor/default-skin.css',
-        'fonts/icomoon/style.css',
-        ])
-        // .pipe(sourcemaps.init())
-        // .pipe(autoprefixer({
-        //     browsers: ['last 2 versions'],
-        //     cascade: false
-        // }))
-        .pipe(concat('styles-merged.css'))
-        .pipe(gulp.dest('css'))
-        // .pipe(rename({suffix: '.min'}))
-        // .pipe(minifycss())
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('css'))
-        .pipe(reload({stream:true}));
-});
+  // Invalidate CDN
+  if (config.distribution) {
+    console.log('Configured with CloudFront distribution')
+    g = g.pipe(cloudfront(config))
+  } else {
+    console.log(
+      'No CloudFront distribution configured - skipping CDN invalidation'
+    )
+  }
 
-/* Reload task */
-gulp.task('bs-reload', function () {
-    browserSync.reload();
-});
-
-/* Prepare Browser-sync for localhost */
-gulp.task('browser-sync', function() {
-    browserSync.init(['css/*.css', 'js/*.js'], {
-        
-        proxy: 'localhost/probootstrap/black'
-        /* For a static server you would use this: */
-        /*
-        server: {
-            baseDir: './'
-        }
-        */
-    });
-});
-
-/* Watch scss, js and html files, doing different things with each. */
-gulp.task('default', ['sass', 'scripts', 'browser-sync'], function () {
-    /* Watch scss, run the sass task on change. */
-    gulp.watch(['scss/*.scss', 'scss/**/*.scss'], ['sass'])
-    /* Watch app.js file, run the scripts task on change. */
-    gulp.watch(['js/main.js'], ['minify-main'])
-    /* Watch .html files, run the bs-reload task on change. */
-    gulp.watch(['*.html'], ['bs-reload']);
-});
+  // Delete removed files
+  if (config.deleteOldVersions) {
+    g = g.pipe(publisher.sync())
+  }
+  // create a cache file to speed up consecutive uploads
+  g = g.pipe(publisher.cache())
+  // print upload updates to console
+  g = g.pipe(awspublish.reporter())
+  return g
+})
